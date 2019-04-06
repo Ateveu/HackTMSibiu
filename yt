@@ -1,0 +1,123 @@
+#include <Servo.h>
+#define enA 6
+#define in1 7
+#define in2 8
+#define enB 10
+#define in3 5
+#define in4 4
+ 
+Servo servo;
+ 
+int servo_position = 0;
+
+char c;
+
+void Forward(int speed){
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+}
+
+void Stop(){
+  analogWrite(enA, 0);
+  analogWrite(enB, 0);
+}
+
+void Backward(int speed){
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+void Left(int speed){
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+
+void Right(int speed){
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+}
+
+void LeftBoss(int speed){
+  analogWrite(enA, speed);
+  analogWrite(enB, 0);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+void Plant(){
+  Forward(255);
+  servo.write(0);
+  delay(500);
+  Backward(255);
+  servo.write(80);
+  delay(500);
+  Stop();
+  
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(enA, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  servo.attach(9);
+  //servo.write(80);
+  Stop();
+  //delay(500);
+  //Forward(255);
+  //delay(500);
+  Plant();
+}
+
+void loop() {/*
+  if(Serial.available()){
+    c = Serial.read();
+    switch(c){
+      case '1':{
+        Forward(255);
+        break;
+      }
+      case '2':{
+        Backward(255);
+        break;
+      }
+      case '3':{
+        Left(255);
+        break;
+      }
+      case '4':{
+        Right(255);
+        break;
+      }
+      case '5':{
+        Stop(255);
+        break;
+      }
+    }
+  }*/
+  
+  // put your main code here, to run repeatedly:
+
+}
